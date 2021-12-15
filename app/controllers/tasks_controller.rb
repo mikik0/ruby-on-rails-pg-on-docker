@@ -3,11 +3,11 @@ class TasksController < ApplicationController
     
     def index
         @tasks = Task.all
-        render json: {tasks: @tasks}
+        render json: @tasks
     end
     
     def show
-        render json: {task: @task}
+        render json: @task
     end
 
     private
