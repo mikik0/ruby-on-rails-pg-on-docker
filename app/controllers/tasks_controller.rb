@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [:show]
+    before_action :set_task, only: [:show, :edit, :update, :destroy]
     
     def index
         @tasks = Task.all
@@ -11,13 +11,16 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = Task.new()
-        title = task_params["title"]
-        content = task_params["content"]
-        @task.title = title
-        @task.content = content
-        p @task
+        @task = Task.new(task_params)
         if @task.save
+            render json: @task, status: :created, location: @task
+        else
+            render json: @task.errors, status: :unprocessable_entity
+        end
+    end
+
+    def update
+        if @task.update(task_params)
             render json: @task, status: :created, location: @task
         else
             render json: @task.errors, status: :unprocessable_entity
