@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [:show, :edit, :update, :destroy]
+    before_action :set_task, only: [:show, :edit, :update]
     
     def index
         @tasks = Task.all
@@ -25,10 +25,6 @@ class TasksController < ApplicationController
         else
             render json: @task.errors, status: :unprocessable_entity
         end
-    end
-
-    def destroy
-        @task.destroy
     end
 
     private
