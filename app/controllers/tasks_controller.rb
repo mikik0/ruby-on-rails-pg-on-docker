@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [:show]
+    before_action :set_task, only: [:show, :destroy]
     
     def index
         @tasks = Task.all
@@ -8,6 +8,10 @@ class TasksController < ApplicationController
     
     def show
         render json: @task
+    endc
+
+    def destroy
+        @task.destroy
     end
 
     private
