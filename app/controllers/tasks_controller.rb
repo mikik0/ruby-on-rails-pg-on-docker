@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     
     def show
         render json: @task
-    endc
+    end
 
     def destroy
         @task.destroy
