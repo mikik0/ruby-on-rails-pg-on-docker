@@ -28,7 +28,11 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        @task.destroy
+        if @task.destroy
+            render json: @task, status: :no_content
+        else
+            render json: @task.errors, status: :unprocessable_entity
+        end
     end
 
     private
