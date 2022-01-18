@@ -2,7 +2,7 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update]
     
     def index
-        @tasks = Task.all
+        @tasks = Task.all.order(created_at: :desc) 
         render json: @tasks
     end
     
