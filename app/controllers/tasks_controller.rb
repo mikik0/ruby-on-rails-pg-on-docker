@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [:show, :edit, :update]
-    
+    before_action :set_task, only: [:show, :edit, :update, :destroy]
+
     def index
         @tasks = Task.all.order(created_at: :desc) 
         render json: @tasks
@@ -22,6 +22,14 @@ class TasksController < ApplicationController
     def update
         if @task.update(task_params)
             render json: @task, status: :created, location: @task
+        else
+            render json: @task.errors, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        if @task.destroy
+            render json: @task, status: :no_content
         else
             render json: @task.errors, status: :unprocessable_entity
         end
