@@ -4,13 +4,13 @@ RSpec.describe Task, type: :model do
     let(:task){ build(:task) }
     describe 'タイトルとコンテンツにバリデーション' do
         subject { task }
-        context '正常形' do
+        context '正常系' do
           it 'タイトルとコンテンツがある場合' do
             is_expected.to be_valid
           end
         end
     
-        context '異常形' do
+        context '異常系' do
           it 'タイトルが空の場合' do
             task.title = nil
             is_expected.to be_invalid
