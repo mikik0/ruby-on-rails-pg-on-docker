@@ -9,7 +9,7 @@ RSpec.describe "Tasks", type: :request do
   describe "GET /tasks" do
     it "Taskが降順に並んでいるか確認" do
       get tasks_path
-      expect(controller.instance_variable_get('@tasks')).to eq([task3, task2, task1])
+      expect(response.body).to eq([task3, task2, task1].to_json)
     end
   end
 end
