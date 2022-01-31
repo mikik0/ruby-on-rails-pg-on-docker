@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :task do
-    id { 1 }
-    title { 'string' }
-    content { 'string' }
+    sequence(:id) { |n| n }
+    sequence(:title) { |n| "タイトル#{n}" }
+    sequence(:content) { |n| "内容#{n}" }
   end
 end
