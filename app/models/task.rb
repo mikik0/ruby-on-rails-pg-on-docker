@@ -1,4 +1,4 @@
 class Task < ApplicationRecord
-    validates :title, presence: { message: 'required.' }
-    validates :content, presence: { message: 'required.' }
+    validates :title, presence: true
+    validates :content, presence: true
 end
