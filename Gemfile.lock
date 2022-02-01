@@ -225,11 +225,8 @@ DEPENDENCIES
   puma (~> 3.11)
   rack-cors
   rails (~> 5.2.3)
-<<<<<<< HEAD
   rails-i18n
-=======
   rspec-rails
->>>>>>> abf79b95fadddcf6c5a34377a3eed4797e0e117b
   sass-rails (~> 5.0.7)
   selenium-webdriver
   spring
