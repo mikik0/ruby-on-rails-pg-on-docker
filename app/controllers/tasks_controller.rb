@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+    include Pagenation
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
