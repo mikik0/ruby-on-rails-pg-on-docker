@@ -2,11 +2,15 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-        @tasks = Task.search(params[:title], params[:status]).order("#{sort_column} #{sort_method}")
-        @keyword = params[:title]
-        render json: @tasks
+        if params[:sort] == "deadline"
+            @tasks = Task.all.order(deadline: :desc)
+            render json: @tasks
+        else
+            @tasks = Task.search(params[:title], params[:status]).order("#{sort_column} #{sort_method}")
+            render json: @tasks
+        end
     end
-    
+
     def show
         render json: @task
     end
@@ -43,7 +47,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-        params.require(:task).permit(:title, :content)
+        params.require(:task).permit(:title, :content, :deadline)
     end
 
     def sort_column
