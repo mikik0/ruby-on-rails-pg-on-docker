@@ -2,10 +2,15 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-        @tasks = Task.all.order(created_at: :desc) 
-        render json: @tasks
+        if params[:sort] == "deadline"
+            @tasks = Task.all.order(deadline: :desc)
+            render json: @tasks
+        else
+            @tasks = Task.all.order(created_at: :desc)
+            render json: @tasks
+        end
     end
-    
+
     def show
         render json: @task
     end
@@ -42,6 +47,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-        params.require(:task).permit(:title, :content)
+        params.require(:task).permit(:title, :content, :deadline)
     end
 end
