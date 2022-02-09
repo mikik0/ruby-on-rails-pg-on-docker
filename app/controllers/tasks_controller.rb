@@ -2,8 +2,8 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-        @tasks = Task.search(params[:keyword])
-        @keyword = params[:keyword]
+        @tasks = Task.search(params[:title], params[:status]).order("#{sort_column} #{sort_method}")
+        @keyword = params[:title]
         render json: @tasks
     end
     
@@ -44,5 +44,13 @@ class TasksController < ApplicationController
 
     def task_params
         params.require(:task).permit(:title, :content)
+    end
+
+    def sort_column
+        Task.column_names.include?(params[:sort_column]) ? params[:sort_column] : "id"
+    end
+
+    def sort_method
+        %w[asc desc].include?(params[:sort_method]) ? params[:sort_method] : "asc"
     end
 end
