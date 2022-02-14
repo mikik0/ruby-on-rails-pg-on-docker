@@ -1,4 +1,3 @@
-
 module Pagination
     def resources_with_pagination(resources)
         {

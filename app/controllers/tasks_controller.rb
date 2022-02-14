@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-    include Pagenation
     before_action :set_task, only: [:show, :edit, :update, :destroy]
+    # include Pagenation
 
     def index
         if params[:sort] == "deadline"
