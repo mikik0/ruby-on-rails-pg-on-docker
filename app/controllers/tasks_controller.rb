@@ -6,7 +6,7 @@ class TasksController < ApplicationController
             @tasks = Task.all.order(deadline: :desc)
             render json: @tasks
         else
-            @tasks = Task.all.order(created_at: :desc)
+            @tasks = Task.search(params[:title], params[:status]).order("#{sort_column} #{sort_method}")
             render json: @tasks
         end
     end
@@ -48,5 +48,13 @@ class TasksController < ApplicationController
 
     def task_params
         params.require(:task).permit(:title, :content, :deadline)
+    end
+
+    def sort_column
+        Task.column_names.include?(params[:sort_column]) ? params[:sort_column] : "id"
+    end
+
+    def sort_method
+        %w[asc desc].include?(params[:sort_method]) ? params[:sort_method] : "asc"
     end
 end
