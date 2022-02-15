@@ -1,13 +1,16 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
+    include Pagination
 
     def index
         if params[:sort] == "deadline"
-            @tasks = Task.all.order(deadline: :desc)
-            render json: @tasks
+            tasks = Task.all.order(deadline: :desc).page(params[:page]).per(params[:per])
+            pagination = pagination(tasks)
+            render json: { tasks: tasks, pagination: pagination }
         else
-            @tasks = Task.all.order(created_at: :desc)
-            render json: @tasks
+            tasks = Task.all.order(created_at: :desc).page(params[:page]).per(params[:per])
+            pagination = pagination(tasks)
+            render json: { tasks: tasks, pagination: pagination }
         end
     end
 
