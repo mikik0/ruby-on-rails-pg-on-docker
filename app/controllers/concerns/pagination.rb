@@ -10,4 +10,3 @@ module Pagination
         }
     end
 end
-
