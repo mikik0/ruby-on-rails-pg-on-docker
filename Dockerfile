@@ -16,4 +16,4 @@ ADD Gemfile.lock $APP_HOME/Gemfile.lock
 ENV BUNDLE_DISABLE_SHARED_GEMS 1
 RUN bundle install -j4
 
-CMD ["bundle", "exec", "rails", "server", "--port", "3000"]
+CMD ["bundle", "exec", "rails", "server"]
