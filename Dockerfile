@@ -7,11 +7,11 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get update -qq \
     && apt-get install -y build-essential nodejs postgresql-client git
 
-ENV APP_HOME /var/src/app
-RUN mkdir -p $APP_HOME
-WORKDIR $APP_HOME
-ADD Gemfile $APP_HOME/Gemfile
-ADD Gemfile.lock $APP_HOME/Gemfile.lock
+COPY Gemfile Gemfile.lock /
+RUN bundle install
 
-ENV BUNDLE_DISABLE_SHARED_GEMS 1
-RUN bundle install -j4
+WORKDIR /app
+
+COPY . .
+
+CMD ["bundle", "exec", "rails", "server"]
